@@ -62,7 +62,7 @@ const metricsMarkup = metrics
       <div class="col-12 col-sm-6 col-xl-3">
         <article class="metric-card h-100">
           <div class="metric-value" data-counter="${metric.value}" data-prefix="${metric.prefix ?? ""}" data-suffix="${metric.suffix ?? ""}">
-            ${metric.prefix ?? ""}0${metric.suffix ?? ""}
+            ${metric.prefix ?? ""}${metric.value}${metric.suffix ?? ""}
           </div>
           <h3 class="metric-label">${metric.label}</h3>
           <p class="metric-description">${metric.description}</p>
@@ -81,7 +81,7 @@ const marketMarkup = marketHighlights
     (item) => `
       <div class="col-12 col-lg-4">
         <article class="insight-card h-100">
-          <div class="eyebrow">Analisis</div>
+          <div class="eyebrow">Análisis</div>
           <h3>${item.title}</h3>
           <p>${item.text}</p>
         </article>
@@ -112,7 +112,7 @@ const administrationClassificationMarkup = administrationClassification
       <div class="col-12 col-md-6 col-xl-4">
         <article class="factor-card h-100">
           <div class="factor-icon"><i class="bi ${item.icon}"></i></div>
-          <div class="eyebrow">Clasificacion</div>
+          <div class="eyebrow">Clasificación</div>
           <h3>${item.title}</h3>
           <div class="factor-classification">${item.classification}</div>
           <p>${item.description}</p>
@@ -175,8 +175,8 @@ const economicHubById = Object.fromEntries(
 );
 
 const economicDiagramMarkup = `
-  <div class="economic-svg-shell">
-    <svg class="economic-svg" viewBox="0 0 900 560" role="img" aria-label="Flujo circular de la renta en una economia cerrada">
+      <div class="economic-svg-shell">
+    <svg class="economic-svg" viewBox="0 0 900 560" role="img" aria-label="Flujo circular de la renta en una economía cerrada">
       <defs>
         <marker id="arrow-real" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
           <path d="M0,0 L10,5 L0,10 z" fill="#157a74"></path>
@@ -248,7 +248,7 @@ const economicDiagramMarkup = `
 
       <g class="economic-svg-flow economic-svg-flow-monetary" data-flow="public-spending">
         <line x1="450" y1="214" x2="450" y2="142" marker-end="url(#arrow-money)"></line>
-        <text x="450" y="194" text-anchor="middle">Gasto publico</text>
+        <text x="450" y="194" text-anchor="middle">Gasto público</text>
       </g>
     </svg>
   </div>
@@ -302,12 +302,12 @@ const macroIssuesMarkup = macroIssues
   .map(
     (issue) => `
       <article class="macro-issue-card macro-issue-${issue.id}">
-        <div class="eyebrow">Problema macroeconomico</div>
+          <div class="eyebrow">Problema macroeconómico</div>
         <h4>${issue.title}</h4>
         <div class="macro-signal-pill">${issue.signal}</div>
         <p>${issue.impact}</p>
         <div class="macro-rationale">
-          <strong>Justificacion:</strong>
+          <strong>Justificación:</strong>
           <span>${issue.rationale}</span>
         </div>
       </article>
@@ -335,10 +335,10 @@ const accountingEventsMarkup = accountingEvents
     (item) => `
       <div class="col-12 col-xl-6">
         <article class="market-side-card h-100">
-          <div class="section-kicker">Hecho economico</div>
+          <div class="section-kicker">Hecho económico</div>
           <h3>${item.title}</h3>
           <ul class="accounting-detail-list">
-            <li><strong>Documentacion de respaldo:</strong> ${item.documents}</li>
+            <li><strong>Documentación de respaldo:</strong> ${item.documents}</li>
             <li><strong>Efecto patrimonial:</strong> ${item.effect}</li>
           </ul>
         </article>
@@ -405,17 +405,17 @@ const galleryMarkup = [
   {
     src: "/assets/organigrama-general.jpg",
     title: "Organigrama general",
-    description: "Sintesis jerarquica de alto nivel de la organizacion.",
+    description: "Síntesis jerárquica de alto nivel de la organización.",
   },
   {
     src: "/assets/organigrama-comercial.jpg",
-    title: "Detalle del area comercial",
+    title: "Detalle del área comercial",
     description: "Gerencias regionales, zonas, canales y frentes comerciales.",
   },
   {
     src: "/assets/ciclo-operativo.jpg",
     title: "Ciclo operativo",
-    description: "Fases del proceso comercial, logistico y administrativo.",
+    description: "Fases del proceso comercial, logístico y administrativo.",
   },
 ]
   .map(
@@ -436,6 +436,11 @@ const galleryMarkup = [
           <div class="gallery-copy">
             <h3>${image.title}</h3>
             <p>${image.description}</p>
+            <small class="visual-source">${
+              image.title === "Ciclo operativo"
+                ? "Fuente: elaboración propia con base en fuentes internas de FBM y documentación institucional."
+                : "Fuente: elaboración propia con base en documentación institucional interna de Familia Bercomat."
+            }</small>
           </div>
         </article>
       </div>
@@ -455,21 +460,22 @@ root.innerHTML = `
           data-bs-target="#mainNav"
           aria-controls="mainNav"
           aria-expanded="false"
-          aria-label="Abrir navegacion"
+          aria-label="Abrir navegación"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="mainNav">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="#inicio">1. Introduccion</a></li>
-            <li class="nav-item"><a class="nav-link" href="#caracterizacion">2.1 Operativa</a></li>
+            <li class="nav-item"><a class="nav-link" href="#inicio">1. Introducción</a></li>
+            <li class="nav-item"><a class="nav-link" href="#caracterizacion">2.1 Descripción</a></li>
+            <li class="nav-item"><a class="nav-link" href="#identidad">2.2 Identidad</a></li>
             <li class="nav-item"><a class="nav-link" href="#mercado">2.3 Mercado</a></li>
             <li class="nav-item"><a class="nav-link" href="#estructura">2.4 Estructura</a></li>
             <li class="nav-item"><a class="nav-link" href="#ciclo">2.5 Ciclo</a></li>
-            <li class="nav-item"><a class="nav-link" href="#administracion">3. Administracion</a></li>
-            <li class="nav-item"><a class="nav-link" href="#economia">4. Economia</a></li>
-            <li class="nav-item"><a class="nav-link" href="#contabilidad">5. Contabilidad</a></li>
-            <li class="nav-item"><a class="nav-link" href="#cierre">7. Conclusion</a></li>
+            <li class="nav-item"><a class="nav-link" href="#administracion">3.1-3.3 Administración</a></li>
+            <li class="nav-item"><a class="nav-link" href="#economia">4.1-4.4 Economía</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contabilidad">5.1-5.5 Contabilidad</a></li>
+            <li class="nav-item"><a class="nav-link" href="#cierre">7. Conclusión</a></li>
           </ul>
         </div>
       </div>
@@ -479,11 +485,11 @@ root.innerHTML = `
       <section class="hero-section" id="inicio">
         <div class="container hero-grid">
           <div class="hero-copy">
-            <div class="hero-meta">1. Introduccion | ${projectMeta.university} | ${projectMeta.faculty}</div>
+            <div class="hero-meta">1. Introducción | ${projectMeta.university} | ${projectMeta.faculty}</div>
             <h1>${projectMeta.title}</h1>
             <p class="hero-subtitle">${projectMeta.subtitle}</p>
             <p class="hero-description">
-              Micrositio interactivo para presentar el analisis academico de una organizacion real del sector de materiales para la construccion,
+              Micrositio interactivo para presentar el análisis académico de una organización real del sector de materiales para la construcción,
               articulando procesos, estructura, mercado y ciclo operativo.
             </p>
             <div class="hero-actions">
@@ -496,8 +502,8 @@ root.innerHTML = `
             <ul class="hero-list">
               <li><strong>Materia:</strong> ${projectMeta.subject}</li>
               <li><strong>Empresa:</strong> Familia Bercomat</li>
-              <li><strong>Ejes:</strong> Administracion, Economia y Contabilidad</li>
-              <li><strong>Formato:</strong> navegacion interactiva para defensa oral</li>
+              <li><strong>Ejes:</strong> Administración, Economía y Contabilidad</li>
+              <li><strong>Formato:</strong> navegación interactiva para defensa oral</li>
             </ul>
           </aside>
         </div>
@@ -507,7 +513,7 @@ root.innerHTML = `
         <div class="container">
           <div class="section-intro compact">
             <span class="section-kicker">Panorama general</span>
-            <h2>Indicadores sinteticos del caso</h2>
+            <h2>Indicadores sintéticos del caso</h2>
           </div>
           <div class="row g-4">${metricsMarkup}</div>
         </div>
@@ -516,34 +522,34 @@ root.innerHTML = `
       <section class="content-section" id="caracterizacion">
         <div class="container">
           <div class="section-intro">
-            <span class="section-kicker">2. Parte 1: Caracterizacion de la organizacion</span>
-            <h2>2.1 Descripcion operativa</h2>
+            <span class="section-kicker">2. Parte 1: Caracterización de la organización</span>
+            <h2>2.1 Descripción operativa</h2>
             <p>${operationalSummary.intro}</p>
           </div>
           <div class="row g-4 align-items-stretch">
             <div class="col-12 col-xl-7">
               <article class="feature-panel h-100">
                 <div class="panel-icon"><i class="bi bi-box-seam"></i></div>
-                <h3>Descripcion operativa</h3>
+                <h3>Descripción operativa</h3>
                 <p>
-                  La empresa ofrece una estructura comercial con surtido profundo, gestion de categorias, cobertura territorial y una operatoria que
-                  requiere coordinar disponibilidad, abastecimiento, atencion comercial, logistica y administracion.
+                  La empresa ofrece una estructura comercial con surtido profundo, gestión de categorías, cobertura territorial y una operatoria que
+                  requiere coordinar disponibilidad, abastecimiento, atención comercial, logística y administración.
                 </p>
                 <p>
-                  Su propuesta excede la venta de materiales basicos y se organiza en multiples lineas para obras, remodelaciones y equipamiento del hogar.
+                  Su propuesta excede la venta de materiales básicos y se organiza en múltiples líneas para obras, remodelaciones y equipamiento del hogar.
                 </p>
               </article>
             </div>
             <div class="col-12 col-xl-5">
-              <article class="identity-panel h-100">
+              <article class="identity-panel h-100" id="identidad">
                 <span class="section-kicker">2.2 Identidad organizacional</span>
-                <h3>Mision, vision y valores</h3>
+                <h3>Misión, visión y valores</h3>
                 <div class="identity-block">
-                  <strong>Mision</strong>
+                  <strong>Misión</strong>
                   <p>${identity.mission}</p>
                 </div>
                 <div class="identity-block">
-                  <strong>Vision</strong>
+                  <strong>Visión</strong>
                   <p>${identity.vision}</p>
                 </div>
                 <div class="identity-block">
@@ -559,8 +565,8 @@ root.innerHTML = `
       <section class="content-section section-accent" id="mercado">
         <div class="container">
           <div class="section-intro">
-            <span class="section-kicker">2. Parte 1: Caracterizacion de la organizacion</span>
-            <h2>2.3 Analisis de mercado</h2>
+            <span class="section-kicker">2. Parte 1: Caracterización de la organización</span>
+            <h2>2.3 Análisis de mercado</h2>
             <p>${operationalSummary.market}</p>
           </div>
           <div class="row g-4">${marketMarkup}</div>
@@ -570,11 +576,11 @@ root.innerHTML = `
       <section class="content-section" id="cobertura">
         <div class="container">
           <div class="section-intro">
-            <span class="section-kicker">2.3 Analisis de mercado</span>
+            <span class="section-kicker">2.3 Análisis de mercado</span>
             <h2>Apoyo visual: cobertura regional del mercado</h2>
             <p>
-              La estructura comercial se organiza por zonas con distintas provincias de referencia, dinamicas de demanda y prioridades operativas.
-              Selecciona una zona para enfocar el mapa y ver su composicion.
+              La estructura comercial se organiza por zonas con distintas provincias de referencia, dinámicas de demanda y prioridades operativas.
+              Seleccioná una zona para enfocar el mapa y ver su composición.
             </p>
           </div>
           <div class="row g-4">
@@ -584,6 +590,9 @@ root.innerHTML = `
             <div class="col-12 col-xl-7">
               <div class="map-card">
                 <div id="coverage-map" class="coverage-map" aria-label="Mapa de cobertura regional"></div>
+                <p class="visual-source map-source">
+                  Fuente: elaboración propia con base en el sitio web oficial de Familia Bercomat y documentación interna de FBM.
+                </p>
               </div>
             </div>
           </div>
@@ -593,10 +602,10 @@ root.innerHTML = `
       <section class="content-section section-dark" id="estructura">
         <div class="container">
           <div class="section-intro inverted">
-            <span class="section-kicker">2. Parte 1: Caracterizacion de la organizacion</span>
+            <span class="section-kicker">2. Parte 1: Caracterización de la organización</span>
             <h2>2.4 Estructura humana</h2>
             <p>
-              La empresa combina areas comerciales, logisticas, administrativas y de soporte con una estructura jerarquica orientada a la coordinacion
+              La empresa combina áreas comerciales, logísticas, administrativas y de soporte con una estructura jerárquica orientada a la coordinación
               multisucursal y a la mejora continua.
             </p>
           </div>
@@ -608,10 +617,10 @@ root.innerHTML = `
       <section class="content-section" id="ciclo">
         <div class="container">
           <div class="section-intro">
-            <span class="section-kicker">2. Parte 1: Caracterizacion de la organizacion</span>
+            <span class="section-kicker">2. Parte 1: Caracterización de la organización</span>
             <h2>2.5 Ciclo operativo</h2>
             <p>
-              El circuito operativo se sostiene por puestos y funciones articuladas entre compras, deposito, ventas, logistica, administracion y
+              El circuito operativo se sostiene por puestos y funciones articuladas entre compras, depósito, ventas, logística, administración y
               servicio al cliente.
             </p>
           </div>
@@ -625,20 +634,20 @@ root.innerHTML = `
       <section class="content-section section-accent" id="administracion">
         <div class="container">
           <div class="section-intro">
-            <span class="section-kicker">3. Parte 2: Analisis desde Administracion</span>
-            <h2>3.1 Clasificacion</h2>
+            <span class="section-kicker">3. Parte 2: Análisis desde Administración</span>
+            <h2>3.1 Clasificación</h2>
             <p>
-              De acuerdo con los criterios trabajados en clase, la empresa puede clasificarse segun propiedad, finalidad,
-              actividad economica, tamano, origen del capital, alcance geografico, forma juridica y trayectoria institucional.
+              De acuerdo con los criterios trabajados en clase, la empresa puede clasificarse según propiedad, finalidad,
+              actividad económica, tamaño, origen del capital, alcance geográfico, forma jurídica y trayectoria institucional.
             </p>
           </div>
           <div class="row g-4 mb-4">${administrationClassificationMarkup}</div>
           <article class="economic-summary-note">
-            <div class="eyebrow">Sintesis administrativa</div>
+            <div class="eyebrow">Síntesis administrativa</div>
             <p>${administrationClassificationSummary}</p>
           </article>
           <div class="section-intro admin-subsection-intro">
-            <span class="section-kicker">3. Parte 2: Analisis desde Administracion</span>
+            <span class="section-kicker">3. Parte 2: Análisis desde Administración</span>
             <h2>3.2 Entorno</h2>
             <p>
               El entorno de la empresa puede analizarse a partir de sus clientes, competidores, proveedores y productos sustitutos,
@@ -652,7 +661,7 @@ root.innerHTML = `
           </article>
           <div class="section-intro compact admin-subsection-intro">
             <span class="section-kicker">3.2 Entorno</span>
-            <h2>Variables del macroentorno criticas para el rubro</h2>
+            <h2>Variables del macroentorno críticas para el rubro</h2>
           </div>
           <div class="row g-4 mb-4">${pestelMarkup}</div>
           <article class="economic-summary-note">
@@ -660,7 +669,7 @@ root.innerHTML = `
             <p>${pestelSummary}</p>
           </article>
           <div class="section-intro compact admin-subsection-intro">
-            <span class="section-kicker">3. Parte 2: Analisis desde Administracion</span>
+            <span class="section-kicker">3. Parte 2: Análisis desde Administración</span>
             <h2>3.3 Proceso administrativo</h2>
           </div>
           <div class="row g-4 mb-4">${administrativeProcessMarkup}</div>
@@ -674,26 +683,26 @@ root.innerHTML = `
       <section class="content-section" id="economia">
         <div class="container">
           <div class="section-intro">
-            <span class="section-kicker">4. Parte 2: Analisis desde Economia</span>
+            <span class="section-kicker">4. Parte 2: Análisis desde Economía</span>
             <h2>4.1 Factores productivos</h2>
             <p>
-              Desde la teoria economica, Familia Bercomat combina tierra, trabajo, capital y tecnologia para sostener su actividad comercial,
-              logistico-administrativa y su capacidad de generar valor en el mercado regional.
+              Desde la teoría económica, Familia Bercomat combina tierra, trabajo, capital y tecnología para sostener su actividad comercial,
+              logístico-administrativa y su capacidad de generar valor en el mercado regional.
             </p>
           </div>
           <div class="row g-4 mb-4">${factorsMarkup}</div>
           <article class="factor-summary">
-            <div class="section-kicker">Lectura economica</div>
+            <div class="section-kicker">Lectura económica</div>
             <p>${productiveFactorsSummary}</p>
           </article>
           <div class="economy-layout">
             <article class="economic-model-card">
-              <div class="section-kicker">4.2 Modelo economico</div>
-              <h3>Flujo circular de la renta en una economia cerrada</h3>
+              <div class="section-kicker">4.2 Modelo económico</div>
+              <h3>Flujo circular de la renta en una economía cerrada</h3>
               <p class="economic-model-intro">
-                Adaptado al caso de Familia Bercomat, el modelo se construye a partir de la relacion entre familias, empresa y Estado,
-                sin incorporar sector externo. La empresa genera valor organizando abastecimiento, almacenamiento, comercializacion,
-                distribucion y servicio, mientras el ingreso y el gasto circulan entre los tres sectores.
+                Adaptado al caso de Familia Bercomat, el modelo se construye a partir de la relación entre familias, empresa y Estado,
+                sin incorporar sector externo. La empresa genera valor organizando abastecimiento, almacenamiento, comercialización,
+                distribución y servicio, mientras el ingreso y el gasto circulan entre los tres sectores.
               </p>
               <div class="economic-diagram-board">
                 ${economicDiagramMarkup}
@@ -715,9 +724,9 @@ root.innerHTML = `
             </article>
             <article class="economic-sequence-card">
               <div class="section-kicker">Secuencia interactiva</div>
-              <h3>Como se relacionan los sectores</h3>
+              <h3>Cómo se relacionan los sectores</h3>
               <p class="economic-sequence-copy">
-                Recorre el circuito paso a paso para ver como se vinculan factores productivos, ingresos, consumo, impuestos y gasto publico.
+                Recorre el circuito paso a paso para ver cómo se vinculan factores productivos, ingresos, consumo, impuestos y gasto público.
               </p>
               <div class="economic-sequence-controls">
                 ${economicStepButtonsMarkup}
@@ -736,8 +745,8 @@ root.innerHTML = `
             </article>
           </div>
           <article class="market-structure-panel">
-            <div class="section-kicker">4.3 Estructura de mercado</div>
-            <h3>Competencia perfecta como supuesto de analisis</h3>
+              <div class="section-kicker">4.3 Estructura de mercado</div>
+              <h3>Competencia perfecta como supuesto de análisis</h3>
             <p class="market-structure-intro">${marketStructureAssumption}</p>
             <div class="row g-4 mb-4">${marketStructureSidesMarkup}</div>
             <div class="market-determinants-grid">
@@ -749,19 +758,19 @@ root.innerHTML = `
             </article>
           </article>
           <article class="macro-panel">
-            <div class="section-kicker">4.4 Analisis macroeconomico</div>
-            <h3>Problemas macroeconomicos actuales que afectan a la organizacion</h3>
+            <div class="section-kicker">4.4 Análisis macroeconómico</div>
+            <h3>Problemas macroeconómicos actuales que afectan a la organización</h3>
             <p class="market-structure-intro">${macroAssumption}</p>
             <div class="macro-grid">
               <div class="macro-issue-grid">
                 ${macroIssuesMarkup}
               </div>
               <aside class="company-signal-panel">
-                <div class="eyebrow">Senales de gestion recientes</div>
-                <h4>Como se relaciona el contexto con la estrategia empresaria</h4>
+                <div class="eyebrow">Señales de gestión recientes</div>
+                <h4>Cómo se relaciona el contexto con la estrategia empresaria</h4>
                 <p>
-                  Senales publicas recientes, junto con fuentes internas de FBM sobre organizacion y operacion, muestran que la compania
-                  respondio al entorno con reenfoque estrategico, disciplina comercial, financiacion y cambios operativos.
+                  Señales públicas recientes, junto con fuentes internas de FBM sobre organización y operación, muestran que la compañía
+                  respondió al entorno con reenfoque estratégico, disciplina comercial, financiación y cambios operativos.
                 </p>
                 <div class="company-signal-timeline">
                   ${companySignalsMarkup}
@@ -769,7 +778,7 @@ root.innerHTML = `
               </aside>
             </div>
             <article class="economic-summary-note macro-summary-note">
-              <div class="eyebrow">Relacion macroeconomica</div>
+              <div class="eyebrow">Relación macroeconómica</div>
               <p>${macroSummary}</p>
             </article>
           </article>
@@ -779,7 +788,7 @@ root.innerHTML = `
       <section class="content-section section-accent" id="contabilidad">
         <div class="container">
           <div class="section-intro">
-            <span class="section-kicker">5. Parte 2: Analisis desde Contabilidad</span>
+            <span class="section-kicker">5. Parte 2: Análisis desde Contabilidad</span>
             <h2>5.1 Estructura patrimonial</h2>
             <p>
               Desde el enfoque contable, la empresa puede analizarse a partir de los recursos que posee, los derechos que mantiene
@@ -792,16 +801,16 @@ root.innerHTML = `
             <p>${accountingStructureSummary}</p>
           </article>
           <div class="section-intro compact admin-subsection-intro">
-            <span class="section-kicker">5. Parte 2: Analisis desde Contabilidad</span>
+            <span class="section-kicker">5. Parte 2: Análisis desde Contabilidad</span>
             <h2>5.2 Patrimonio neto</h2>
           </div>
           <article class="economic-summary-note mb-4">
-            <div class="eyebrow">Expresion formal</div>
+            <div class="eyebrow">Expresión formal</div>
             <p>${accountingNetWorth}</p>
           </article>
           <div class="section-intro compact admin-subsection-intro">
-            <span class="section-kicker">5. Parte 2: Analisis desde Contabilidad</span>
-            <h2>5.3 Hechos economicos</h2>
+            <span class="section-kicker">5. Parte 2: Análisis desde Contabilidad</span>
+            <h2>5.3 Hechos económicos</h2>
           </div>
           <div class="row g-4 mb-4">${accountingEventsMarkup}</div>
           <article class="economic-summary-note mb-4">
@@ -812,14 +821,14 @@ root.innerHTML = `
             <div class="col-12 col-xl-6">
               <article class="feature-panel h-100">
                 <div class="section-kicker">5.4 Control contable</div>
-                <h3>Recuento ciclico de inventarios</h3>
+                <h3>Recuento cíclico de inventarios</h3>
                 <p>${accountingControl}</p>
               </article>
             </div>
             <div class="col-12 col-xl-6">
               <article class="identity-panel h-100">
                 <div class="section-kicker">5.5 Importancia del SIC</div>
-                <h3>Sistema de Informacion Contable</h3>
+                <h3>Sistema de Información Contable</h3>
                 <p>${accountingSIC}</p>
               </article>
             </div>
@@ -830,7 +839,7 @@ root.innerHTML = `
       <section class="content-section section-accent" id="cierre">
         <div class="container">
           <div class="section-intro">
-            <span class="section-kicker">7. Conclusion</span>
+            <span class="section-kicker">7. Conclusión</span>
             <h2>Conclusiones del trabajo</h2>
             <p>${conclusionSummary}</p>
           </div>
@@ -859,7 +868,7 @@ root.innerHTML = `
         <div class="modal-header border-0">
           <div>
             <div class="section-kicker mb-1">Recurso visual</div>
-            <h3 class="modal-title fs-4" id="imageModalTitle">Grafico</h3>
+            <h3 class="modal-title fs-4" id="imageModalTitle">Gráfico</h3>
           </div>
           <div class="modal-actions">
             <a
@@ -1006,10 +1015,10 @@ if (modalElement && modalTitle && modalDescription && modalPreview && modalOpenO
     trigger.addEventListener("click", () => {
       const imageSrc = trigger.dataset.imageSrc ?? "";
 
-      modalTitle.textContent = trigger.dataset.imageTitle ?? "Grafico";
+      modalTitle.textContent = trigger.dataset.imageTitle ?? "Gráfico";
       modalDescription.textContent = trigger.dataset.imageDescription ?? "";
       modalPreview.src = imageSrc;
-      modalPreview.alt = trigger.dataset.imageTitle ?? "Grafico ampliado";
+      modalPreview.alt = trigger.dataset.imageTitle ?? "Gráfico ampliado";
       modalOpenOriginal.href = imageSrc;
       modal.show();
     });
@@ -1023,7 +1032,7 @@ function animateCounter(element: HTMLElement): void {
   const prefix = element.dataset.prefix ?? "";
   const suffix = element.dataset.suffix ?? "";
   const start = performance.now();
-  const duration = 1200;
+  const duration = 450;
 
   const tick = (time: number) => {
     const progress = Math.min((time - start) / duration, 1);

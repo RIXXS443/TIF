@@ -1161,6 +1161,18 @@ body::before {
   padding-top: 1rem;
 }
 
+.visual-source {
+  display: block;
+  margin-top: 0.65rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.map-source {
+  margin: 0.9rem 0 0;
+}
+
 .cycle-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
